@@ -1,7 +1,8 @@
 flask
 flask-smorest
+Flask-Smorest
 flask-sqlalchemy
+flask_migrate
 sqlalchemy
 marshmallow
 python-dotenv
-flask-migrate
