@@ -1,8 +1,11 @@
-flask
+flask~=3.0.3
 flask-smorest
 Flask-Smorest
 flask-sqlalchemy
 flask_migrate
-sqlalchemy
-marshmallow
+sqlalchemy~=2.0.31
+marshmallow~=3.21.3
 python-dotenv
+
+openai~=1.35.10
+alembic~=1.13.2
