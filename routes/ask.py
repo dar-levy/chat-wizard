@@ -1,7 +1,7 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 
-from schemas.ask_schema import AskSchema, QuestionSchema
+from schemas.dialog import DialogSchema, QuestionSchema
 
 blp = Blueprint('ask', __name__, description="Ask a question & pass to OpenAI")
 
@@ -9,11 +9,10 @@ blp = Blueprint('ask', __name__, description="Ask a question & pass to OpenAI")
 @blp.route('/ask')
 class Ask(MethodView):
     @blp.arguments(QuestionSchema)
-    @blp.response(200, AskSchema)
+    @blp.response(200, DialogSchema)
     def post(self, ask_data):
-        print(ask_data)
         return {
             "id": 1,
-            "question": "Some question",
+            "question": ask_data['question'],
             "answer": "Some answer"
         }
