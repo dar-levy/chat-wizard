@@ -8,4 +8,4 @@ class AskSchema(Schema):
 
 
 class QuestionSchema(Schema):
-    question = fields.Str(required=True, validate=validate.Length(max=100))
+    question = fields.Str(required=True, validate=validate.Length(min=5, max=200))
