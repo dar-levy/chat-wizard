@@ -10,5 +10,10 @@ blp = Blueprint('ask', __name__, description="Ask a question & pass to OpenAI")
 class Ask(MethodView):
     @blp.arguments(QuestionSchema)
     @blp.response(200, AskSchema)
-    def post(self):
-        return {"id": 1, "question": "Some question", "answer": "Some answer"}
+    def post(self, ask_data):
+        print(ask_data)
+        return {
+            "id": 1,
+            "question": "Some question",
+            "answer": "Some answer"
+        }
