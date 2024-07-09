@@ -1,4 +1,7 @@
-Flask-Smorest
-Flask-SQLAlchemy
+flask
+flask-smorest
+flask-sqlalchemy
+sqlalchemy
 marshmallow
 python-dotenv
+flask-migrate
