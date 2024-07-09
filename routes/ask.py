@@ -11,9 +11,8 @@ class Ask(MethodView):
     @blp.arguments(QuestionSchema)
     @blp.response(200, DialogSchema)
     def post(self, ask_data):
-        print(ask_data)
         return {
             "id": 1,
-            "question": "Some question",
+            "question": ask_data['question'],
             "answer": "Some answer"
         }
