@@ -8,3 +8,6 @@ class DialogModel(db.Model):
     id = db.Column(Integer, primary_key=True, autoincrement=True)
     question = db.Column(Text, nullable=False)
     answer = db.Column(Text, nullable=False)
+
+    def summary(self):
+        return f"Q: {self.question} - A: {self.answer}"
