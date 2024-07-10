@@ -17,6 +17,7 @@ This project is a Flask-based REST API that uses OpenAI to generate responses to
 
 - Docker
 - Docker Compose
+- Python and pip
 
 ### Installation
 
@@ -27,7 +28,7 @@ This project is a Flask-based REST API that uses OpenAI to generate responses to
    cd chat-wizard
    ```
 
-2. **Create and fill the environment file**:
+2. **Create and fill the environment files**:
 
    - **.env**: Create a file named `.env` in the project root with the following content:
 
@@ -36,42 +37,46 @@ This project is a Flask-based REST API that uses OpenAI to generate responses to
      OPENAI_API_KEY=your_openai_api_key_here
      ```
 
+   - **.flaskenv**: Create a file named `.flaskenv` in the project root with the following content:
 
-### Running the Application
+     ```env
+     FLASK_APP=app
+     FLASK_DEBUG=True
+     ```
 
-1. **Build the Docker images**:
+3. **Install Python dependencies**:
 
-   Before running the containers, you need to build the Docker images. Run the following command:
+   Run the following command to install the necessary Python packages:
 
    ```sh
-   docker compose build
+   pip install -r requirements.txt
    ```
 
-2. **Start the Docker containers**:
+4. **Run database migrations**:
 
-   After building the images, start the Docker containers using:
+   Before starting the application, you need to set up the database schema. Run the following commands:
+
+   - Generate the initial database migration:
+
+     ```sh
+     flask db migrate
+     ```
+
+   - Apply the migration to the database:
+
+     ```sh
+     flask db upgrade
+     ```
+
+5. **Start the Docker containers**:
+
+   Use Docker Compose to start the backend and database containers:
 
    ```sh
    docker compose up
    ```
 
    This command will build the Docker images for the backend server and start both the backend and PostgreSQL containers.
-
-### Database Migration
-
-The project uses Flask-Migrate and Alembic for database migrations. After running the containers, you can perform database migrations with the following commands:
-
-1. **Generate a new migration**:
-
-   ```sh
-   docker compose exec backend flask db migrate -m "Initial migration."
-   ```
-
-2. **Apply the migration**:
-
-   ```sh
-   docker compose exec backend flask db upgrade
-   ```
 
 ### API Endpoints
 
@@ -98,5 +103,5 @@ The project uses Flask-Migrate and Alembic for database migrations. After runnin
 The API documentation is available via Swagger UI. Once the Docker containers are running, you can access the Swagger UI at:
 
 ```
-http://localhost:5005/swagger-ui
+http://localhost:5000/swagger-ui
 ```
