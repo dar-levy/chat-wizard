@@ -1,5 +1,6 @@
 flask~=3.0.3
 flask-smorest
+flask_smorest
 Flask-Smorest
 flask-sqlalchemy
 flask_migrate
