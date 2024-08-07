@@ -7,6 +7,7 @@ flask_migrate
 sqlalchemy~=2.0.31
 marshmallow~=3.21.3
 python-dotenv
+psycopg2-binary
 
 openai~=1.35.10
 alembic~=1.13.2
