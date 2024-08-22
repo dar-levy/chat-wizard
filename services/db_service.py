@@ -19,6 +19,15 @@ def save_user(username, password):
     try_save_to_db(user)
 
 
+def delete_user(user):
+    try:
+        db.session.delete(user)
+        db.session.commit()
+    except SQLAlchemyError:
+        db.session.rollback()
+        abort(500, message="An error occurred while inserting the dialog. Please try again.")
+
+
 def try_save_to_db(model):
     try:
         db.session.add(model)

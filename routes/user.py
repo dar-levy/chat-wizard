@@ -4,7 +4,7 @@ from flask_smorest import Blueprint, abort
 from db import db
 from schemas.user import UserSchema
 from models import UserModel
-from services.db_service import save_user
+from services.db_service import save_user, delete_user
 
 blp = Blueprint('Users', 'users', __name__, description="Operations on users")
 
@@ -27,8 +27,6 @@ class User(MethodView):
 
     def delete(self, user_id):
         user = UserModel.query.get_or_404(user_id)
-        db.session.delete(user)
-        db.session.commit()
+        delete_user(user)
 
         return {"message": "User deleted"}, 200
-    
