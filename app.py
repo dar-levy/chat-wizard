@@ -3,6 +3,7 @@ import os
 from flask import Flask
 from flask_smorest import Api
 from flask_migrate import Migrate
+from flask_jwt_extended import JWTManager
 
 from routes.ask import blp as ask_blueprint
 from db import db
