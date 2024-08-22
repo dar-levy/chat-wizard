@@ -33,7 +33,7 @@ class UserLogin(MethodView):
         if user and pbkdf2_sha256.verify(user_data["password"], user.password):
             access_token = create_access_token(identity=user.id, fresh=True)
             refresh_token = create_refresh_token(user.id)
-            return {"access_token": access_token, "refresh_token": refresh_token}, 200
+            return {"access_token": access_token}, 200
 
         abort(401, message="Invalid credentials.")
 
@@ -56,11 +56,13 @@ class User(MethodView):
     when we are manipulating data regarding the users.
     """
 
+    @jwt_required()
     @blp.response(200, UserSchema)
     def get(self, user_id):
         user = UserModel.query.get_or_404(user_id)
         return user
 
+    @jwt_required()
     def delete(self, user_id):
         user = UserModel.query.get_or_404(user_id)
         delete_user(user)
