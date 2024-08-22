@@ -7,7 +7,6 @@ from flask_jwt_extended import JWTManager
 
 from routes.ask import blp as ask_blueprint
 from db import db
-import models
 
 
 def create_app(db_url=None):
@@ -24,8 +23,11 @@ def create_app(db_url=None):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["PROPAGATE_EXCEPTIONS"] = True
     db.init_app(app)
-    migrate = Migrate(app, db)
+    Migrate(app, db)
     api = Api(app)
+
+    app.config("JWT_SECRET_KEY") == os.getenv("JWT_SECRET_KEY")
+    jwt = JWTManager(app)
 
     api.register_blueprint(ask_blueprint)
 
