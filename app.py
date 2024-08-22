@@ -6,6 +6,7 @@ from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 
 from routes.ask import blp as ask_blueprint
+from routes.user import blp as user_blueprint
 from db import db
 
 
@@ -30,5 +31,6 @@ def create_app(db_url=None):
     jwt = JWTManager(app)
 
     api.register_blueprint(ask_blueprint)
+    api.register_blueprint(user_blueprint)
 
     return app
