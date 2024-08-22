@@ -1,10 +1,12 @@
 import os
 
-from flask import Flask
+from flask import Flask, jsonify
 from flask_smorest import Api
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 
+from blocklist import BLOCKLIST
+from config.jwt_config import configure_jwt
 from routes.ask import blp as ask_blueprint
 from routes.user import blp as user_blueprint
 from db import db
@@ -26,9 +28,7 @@ def create_app(db_url=None):
     db.init_app(app)
     Migrate(app, db)
     api = Api(app)
-
-    app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
-    jwt = JWTManager(app)
+    configure_jwt(app)
 
     api.register_blueprint(ask_blueprint)
     api.register_blueprint(user_blueprint)
