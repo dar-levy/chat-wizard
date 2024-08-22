@@ -7,16 +7,16 @@ from passlib.hash import pbkdf2_sha256
 
 def save_dialog(question, answer):
     dialog = DialogModel(question=question, answer=answer)
-    try_save_to_db(dialog)
+    return try_save_to_db(dialog)
 
 
 def save_user(username, password):
-    user = UserModel(
+    new_user = UserModel(
         username=username,
         password=pbkdf2_sha256.hash(password),
     )
 
-    try_save_to_db(user)
+    return try_save_to_db(new_user)
 
 
 def delete_user(user):

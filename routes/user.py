@@ -14,9 +14,10 @@ blp = Blueprint('Users', 'users', __name__, description="Operations on users")
 @blp.route('/register')
 class User(MethodView):
     @blp.arguments(UserSchema)
+    @blp.response(200, UserSchema)
     def post(self, user_data):
         if UserModel.query.filter(UserModel.username == user_data['username']).first():
-            abort(409, 'User already exists')
+            abort(409, message='User already exists')
 
         return save_user(user_data['username'], user_data['password'])
 
