@@ -52,31 +52,31 @@ This project is a Flask-based REST API that uses OpenAI to generate responses to
    pip install -r requirements.txt
    ```
 
-4. **Run database migrations**:
+4. **Start the Docker containers**:
 
-   Before starting the application, you need to set up the database schema. Run the following commands:
+   Use Docker Compose to start the backend and database containers:
+
+   ```sh
+   docker compose up -d
+   ```
+
+   This command will build the Docker images for the backend server and start both the backend and PostgreSQL containers.
+
+5. **Run database migrations**:
+
+   You need to set up the database schema. Run the following commands:
 
    - Generate the initial database migration:
 
      ```sh
-     flask db migrate
+     docker compose exec backend flask db migrate
      ```
 
    - Apply the migration to the database:
 
      ```sh
-     flask db upgrade
+     docker compose exec backend flask db upgrade
      ```
-
-5. **Start the Docker containers**:
-
-   Use Docker Compose to start the backend and database containers:
-
-   ```sh
-   docker compose up
-   ```
-
-   This command will build the Docker images for the backend server and start both the backend and PostgreSQL containers.
 
 ### API Endpoints
 
